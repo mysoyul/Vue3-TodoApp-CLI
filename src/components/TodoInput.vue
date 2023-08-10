@@ -13,7 +13,7 @@ import { ref } from 'vue';
 const newTodoItem = ref("")
 
 //input:todo 이름을 갖는 Event 정의
-const emit = defineEmits(["input:todo"])
+const emit = defineEmits(["input:todo","add:todo"])
 
 const handleInput = (event) => {
     const todoText = event.target.value
@@ -25,8 +25,7 @@ const handleInput = (event) => {
 const addTodo = () => {
     if (newTodoItem.value !== "") {
         const todoItem = newTodoItem.value
-        const todoItemObj = {completed: false, item:todoItem}
-        localStorage.setItem(todoItem, JSON.stringify(todoItemObj))
+        emit('add:todo', todoItem)
         clearInput()
     }
 }

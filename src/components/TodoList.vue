@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todo, index) in todoItems" :key="index" class="shadow">
+            <li v-for="(todo, index) in props.propsData" :key="index" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }" 
                     @click="toggleComplete(todo)"></i>
                 <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
@@ -15,8 +15,10 @@
 
 <script setup>
 import { ref } from 'vue'
-const todoItems = ref([])
 
+const props = defineProps(['propsData'])
+
+const todoItems = ref([])
 
 const removeTodo = (todoItem, index) => {
     localStorage.removeItem(todoItem)

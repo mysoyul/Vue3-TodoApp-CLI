@@ -1,9 +1,10 @@
 <template>
     <div>
         <ul>
-            <li v-for="(item, index) in todoItems" :key="index">
-                {{ item }}
-                <span class="removeBtn" @click="removeTodo(item, index)">
+            <li v-for="(todo, index) in todoItems" :key="index" class="shadow">
+                <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"></i>
+                <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
+                <span class="removeBtn" @click="removeTodo(todo.item, index)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
@@ -18,8 +19,9 @@ const todoItems = ref([])
 onBeforeMount(() => {
     if (localStorage.length > 0) {
         for (var i = 0; i < localStorage.length; i++) {
-            const storageValue = localStorage.key(i)
-            todoItems.value.push(storageValue)
+            const storageKey = localStorage.key(i)
+            const itemJson = localStorage.getItem(storageKey);
+            todoItems.value.push(JSON.parse(itemJson));
         }
     }
 })
@@ -49,7 +51,6 @@ li {
     padding: 0 0.9rem;
     background: white;
     border-radius: 5px;
-    /*box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);*/
 }
 
 .removeBtn {

@@ -14,18 +14,9 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue'
+import { ref } from 'vue'
 const todoItems = ref([])
 
-onBeforeMount(() => {
-    if (localStorage.length > 0) {
-        for (var i = 0; i < localStorage.length; i++) {
-            const storageKey = localStorage.key(i)
-            const itemJson = localStorage.getItem(storageKey);
-            todoItems.value.push(JSON.parse(itemJson));
-        }
-    }
-})
 
 const removeTodo = (todoItem, index) => {
     localStorage.removeItem(todoItem)

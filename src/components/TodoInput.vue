@@ -21,9 +21,11 @@ const handleInput = (event) => {
     newTodoItem.value = todoText
 }
 const addTodo = () => {
-    const todoItem = newTodoItem.value
-    localStorage.setItem(todoItem, todoItem)
-    clearInput()
+    if (newTodoItem.value !== "") {
+        const todoItem = newTodoItem.value
+        localStorage.setItem(todoItem, todoItem)
+        clearInput()
+    }
 }
 const clearInput = () => {
     newTodoItem.value = ""

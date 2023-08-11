@@ -5,7 +5,7 @@
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
                     @click="toggleComplete(todo)"></i>
                 <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
-                <span class="removeBtn" @click="removeTodo(todo.item, index)">
+                <span class="removeBtn" @click="removeTodo(todo, index)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
@@ -23,8 +23,8 @@ const todoItems = computed(() => store.state.todoItems)
 const emit = defineEmits(["remove:todo", "toggle:todo"])
 
 const removeTodo = (todoItem, index) => {
-    //'remove:todo' Event 발생시킴
-    emit('remove:todo', todoItem, index)
+    //store mutations 객체내의 removeTodo 함수호출
+    store.commit("removeTodo", {todoItem, index})    
 }
 
 const toggleComplete = (todoItem) => {

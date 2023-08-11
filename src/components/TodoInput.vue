@@ -4,7 +4,7 @@
         <span class="addContainer" @click="addTodo">
             <i class="fas fa-plus addBtn"></i>
         </span>
-        <MyModal v-if="showModal" @close="showModal = false">
+        <MyModal v-show="showModal" @close="showModal = false">
             <template v-slot:header>
                 <h3>
                     경고!
@@ -12,7 +12,7 @@
                 </h3>
             </template>
             <template v-slot:body>
-                <div>아무것도 입력하지 않으셨습니다.</div>
+                <div>할일을 입력하세요!</div>
             </template>
         </MyModal>
     </div>

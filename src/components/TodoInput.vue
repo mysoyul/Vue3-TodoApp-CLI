@@ -30,19 +30,20 @@ const showModal = ref(false)
 const newTodoItem = ref("")
 
 //input:todo 이름을 갖는 Event 정의
-const emit = defineEmits(["input:todo", "add:todo"])
+const emit = defineEmits(["input:todo"])
 
 const handleInput = (event) => {
     const todoText = event.target.value
     if (!todoText) return
     //Event 발생시킴
-    store.commit("addTodo", todoText)
+    emit('input:todo', todoText)
     newTodoItem.value = todoText
 }
 const addTodo = () => {
     if (newTodoItem.value !== "") {
         const todoItem = newTodoItem.value
-        emit('add:todo', todoItem)
+        //mutations 객체내의 addTodo 함수 호출하기
+        store.commit("addTodo", todoItem)
         clearInput()
     } else {
         showModal.value = !showModal.value

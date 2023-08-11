@@ -33,7 +33,7 @@ export const store = createStore({
                 .then(items => {
                     commit('setTodoItems', items)
                 })
-        },
+        }, //removeTodo
         addTodo({ commit }, payload) {
             http
                 .post(`/todos`, payload)
@@ -41,7 +41,16 @@ export const store = createStore({
                 .then(items => {
                     commit('setTodoItems', items)
                 })
-        },
+        }, //addTodo
+        toggleTodo({ commit }, payload) {
+            http
+                .patch(`/todos/${payload.id}`, payload)
+                .then(r => r.data)
+                .then(items => {
+                    commit('setTodoItems', items)
+                })
+        }, //toggleTodo
+
 
     },
     mutations: {

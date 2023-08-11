@@ -20,6 +20,7 @@ import { useStore } from "vuex"
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
+
 const loading = ref(false);
 const post = computed(() => store.state.modulePost.post);
 
@@ -28,7 +29,6 @@ onBeforeMount(() => {
 });
 
 const removePost = (id) => {
-  console.log('-----------------removePost' + id)
   store.dispatch("modulePost/removePost", id);
   router.push("/posts");
 };

@@ -23,7 +23,7 @@ export default {
   setup() {
     const todoItems = reactive([])
 
-    //lifecycle hook
+    //lifecycle hook override(재정의)
     onBeforeMount(() => {
       if (localStorage.length > 0) {
         for (var i = 0; i < localStorage.length; i++) {

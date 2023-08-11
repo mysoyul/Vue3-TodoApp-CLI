@@ -6,9 +6,10 @@
 
 <script>
 export default {
-    setup() {
+    emits:['clear:todo'],
+    setup(props, { emit }) {
         const clearTodo = () => {
-            localStorage.clear()
+            emit('clear:todo')
         }
         return { clearTodo }
     }

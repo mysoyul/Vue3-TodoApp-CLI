@@ -19,6 +19,7 @@ const props = defineProps(['propsData'])
 const emit = defineEmits(["remove:todo","toggle:todo"])
 
 const removeTodo = (todoItem, index) => {
+    //'remove:todo' Event 발생시킴
     emit('remove:todo', todoItem, index)
 }
 

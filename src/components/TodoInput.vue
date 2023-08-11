@@ -44,7 +44,7 @@ const addTodo = () => {
         const todoItemStr = newTodoItem.value
         const itemObj = { completed: false, item: todoItemStr } 
         //actions 객체내의 addTodo 함수 호출하기
-        store.dispatch("addTodo", itemObj)        
+        store.dispatch("moduleTodo/addTodo", itemObj)        
         clearInput()
     } else {
         showModal.value = !showModal.value

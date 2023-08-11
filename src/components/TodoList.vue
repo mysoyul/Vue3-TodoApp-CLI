@@ -18,21 +18,21 @@ import { useStore } from "vuex"
 import { computed, onMounted } from "vue"
 
 const store = useStore()
-const todoItems = computed(() => store.state.todoItems)
+const todoItems = computed(() => store.state.moduleTodo.todoItems)
 
 onMounted(() => {
     console.log('onMounted...')
-    store.dispatch("loadTodoItems")
+    store.dispatch("moduleTodo/loadTodoItems")
 })
 
 const removeTodo = (todoItem) => {
     //store actions 객체내의 removeTodo 함수호출
-    store.dispatch("removeTodo", todoItem)
+    store.dispatch("moduleTodo/removeTodo", todoItem)
 }
 
 const toggleComplete = (todoItem) => {
     todoItem.completed = !todoItem.completed
-    store.dispatch("toggleTodo", todoItem)
+    store.dispatch("moduleTodo/toggleTodo", todoItem)
 }
 
 </script>

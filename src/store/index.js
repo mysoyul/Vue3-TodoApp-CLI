@@ -11,7 +11,7 @@ const storage = {
                 }
             }
         }
-        return arr;
+        return arr
     }
 }
 

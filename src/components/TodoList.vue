@@ -1,7 +1,7 @@
 <template>
     <div>
         <TransitionGroup name="list" tag="ul">
-            <li v-for="(todo, index) in props.propsData" :key="index" class="shadow">
+            <li v-for="(todo, index) in todoItems" :key="index" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
                     @click="toggleComplete(todo)"></i>
                 <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
@@ -14,8 +14,12 @@
 </template>
 
 <script setup>
+import { useStore } from "vuex"
+import { computed } from "vue"
 
-const props = defineProps(['propsData'])
+const store = useStore()
+const todoItems = computed(() => store.state.todoItems)
+
 const emit = defineEmits(["remove:todo", "toggle:todo"])
 
 const removeTodo = (todoItem, index) => {

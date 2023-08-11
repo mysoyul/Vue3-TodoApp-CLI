@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @add:todo="addTodo"></TodoInput>
-    <TodoList :props-data="todoItems" @remove:todo="removeTodo" @toggle:todo="toggleComplete"></TodoList>
+    <TodoList  @remove:todo="removeTodo" @toggle:todo="toggleComplete"></TodoList>
     <TodoFooter @clear:todo="clearTodo"></TodoFooter>
   </div>
 </template>
@@ -12,7 +12,7 @@ import TodoHeader from '@/components/TodoHeader.vue'
 import TodoInput from '@/components/TodoInput.vue'
 import TodoList from '@/components/TodoList.vue'
 import TodoFooter from '@/components/TodoFooter.vue'
-import { reactive, onBeforeMount } from "vue"
+import { reactive } from "vue"
 
 export default {
   name: 'App',
@@ -21,19 +21,6 @@ export default {
   },
   setup() {
     const todoItems = reactive([])
-
-    //lifecycle hook override(재정의)
-    onBeforeMount(() => {
-      if (localStorage.length > 0) {
-        for (var i = 0; i < localStorage.length; i++) {
-          const storageKey = localStorage.key(i)
-          const itemJson = localStorage.getItem(storageKey)
-          if (itemJson) {
-            todoItems.push(JSON.parse(itemJson));
-          } //if
-        } //for
-      } //if
-    }) //onBeforeMount
 
     const addTodo = (todoItemStr) => {
       const todoItemObj = { completed: false, item: todoItemStr };

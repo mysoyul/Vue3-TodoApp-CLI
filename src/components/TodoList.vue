@@ -3,7 +3,7 @@
         <TransitionGroup name="list" tag="ul">
             <li v-for="(todo, index) in todoItems" :key="index" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
-                    @click="toggleComplete(todo)"></i>
+                    @click="toggleComplete(todo, index)"></i>
                 <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
                 <span class="removeBtn" @click="removeTodo(todo, index)">
                     <i class="fas fa-trash-alt"></i>
@@ -20,15 +20,13 @@ import { computed } from "vue"
 const store = useStore()
 const todoItems = computed(() => store.state.todoItems)
 
-const emit = defineEmits(["remove:todo", "toggle:todo"])
-
 const removeTodo = (todoItem, index) => {
     //store mutations 객체내의 removeTodo 함수호출
     store.commit("removeTodo", {todoItem, index})    
 }
 
-const toggleComplete = (todoItem) => {
-    emit('toggle:todo', todoItem)
+const toggleComplete = (todoItem, index) => {
+    store.commit("toggleTodo", {todoItem, index})
 }
 
 </script>

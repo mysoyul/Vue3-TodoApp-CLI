@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList  @remove:todo="removeTodo" @toggle:todo="toggleComplete"></TodoList>
+    <TodoList></TodoList>
     <TodoFooter @clear:todo="clearTodo"></TodoFooter>
   </div>
 </template>
@@ -20,26 +20,14 @@ export default {
     TodoHeader, TodoInput, TodoList, TodoFooter
   },
   setup() {
-    const todoItems = reactive([])
-
-    const removeTodo = (todoItemStr, index) => {
-      localStorage.removeItem(todoItemStr);
-      todoItems.splice(index, 1);
-    } //removeTodo
-
-    const toggleComplete = (todoItem) => {
-      const { item, completed } = todoItem;
-      todoItem.completed = !completed;
-      localStorage.removeItem(item);
-      localStorage.setItem(item, JSON.stringify(todoItem));
-    } //toggleComplete
+    const todoItems = reactive([])    
 
     const clearTodo = () => {
       localStorage.clear()
       todoItems.splice(0)
     } //clearTodo
 
-    return { todoItems, removeTodo, toggleComplete, clearTodo };
+    return { todoItems, clearTodo };
   }, //setup
 
 }
